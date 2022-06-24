@@ -1,0 +1,16 @@
+#! /usr/bin/env node
+
+let program = require("commander");
+let createProject = require("./createProject");
+
+program
+  .version("1.0.0")
+program
+  .command('create <name>')
+  .option("-t, --type <name>", "project type")
+  .action(function (name, options) {
+    createProject(name,options.type)
+})
+
+
+program.parse(process.argv);
