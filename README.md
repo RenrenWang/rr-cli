@@ -1,12 +1,12 @@
-# 前端自定义脚手架 rr-cli
+# 前端自定义脚手架 rrrr-cli
 
 ### 安装
 ```javascript
-npm install rr-cli
+npm install rrrr-cli
 ```
 ### 使用
 ```javascript
-  rr-cli create myapp
+  rrrr-cli create myapp
 ```
 ### 参数
 -t 模版名称
