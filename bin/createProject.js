@@ -8,9 +8,10 @@ require("shelljs/global"); // 执行shell脚本
 let log = function (txt) {
   console.log(chalk.green.bold(txt));
 };
-function downloadAsync(name, type) {
+function downloadAsync(name) {
   return new Promise(function (resolve, reject) {
-    download(`RenrenWang/${type}`, name, { clone: false }, (err) => {
+    log(`crate ${name}...`);
+    download(`RenrenWang/temple`, name, { clone: false }, (err) => {
       if (err) {
         log(err);
         process.exit(1);
@@ -45,35 +46,35 @@ async function createProject(name, type) {
     rm("-rf", name); // shell rm
     log(`delete ${name} success`);
   }
-  var questions = [
-    {
-      type: "list",
-      name: "choseTemples",
-      message: `chose temples ?`,
-      choices: ["typescript", "javascript"],
-      default: "javascript",
-    },
-  ];
+  // var questions = [
+  //   {
+  //     type: "list",
+  //     name: "choseTemples",
+  //     message: `chose temples ?`,
+  //     choices: ["typescript", "javascript"],
+  //     default: "javascript",
+  //   },
+  // ];
 
-  const answer = await inquirer.prompt(questions).then((answers) => {
-    return answers;
-  });
+  // const answer = await inquirer.prompt(questions).then((answers) => {
+  //   return answers;
+  // });
 
-  if (!answer.choseTemples) {
-    process.exit();
-  }
-  await downloadAsync(name, type);
+  // if (!answer.choseTemples) {
+  //   process.exit();
+  // }
+  await downloadAsync(name);
 
   cd(name); // shell cd
 
-  log(`安装模块 --- yarn`);
+  log(`安装模块 --- npm`);
   log("安装模块中...");
   log(
     "安装耗时可能会很长，请耐心等待，您也可以通过 ctrl+c停止安装， 手动 npm install"
   );
-  exec("yarn  install"); // 执行自定义的shell命令 npm install
+  exec("npm  install"); // 执行自定义的shell命令 npm install
   log("正在启动项目");
-  exec("yarn start"); // 执行自定义的shell命令 npm start
+  exec("npm dev"); // 执行自定义的shell命令 npm start
   log("脚手架初始化完成");
   process.exit();
 }
